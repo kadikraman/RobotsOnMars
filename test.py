@@ -47,3 +47,16 @@ class RobotTest(unittest.TestCase):
         robot.move_forward()
         self.assertEqual(robot.current_x, 0)
         self.assertEqual(robot.current_y, 2)
+
+    def test_turn_left(self):
+        robot = Robot(1, 2, 'N', 'EFFF')
+        self.assertEqual(robot.turn('L'), 'W')
+
+        robot = Robot(1, 2, 'S', 'EFFF')
+        self.assertEqual(robot.turn('L'), 'E')
+
+        robot = Robot(1, 2, 'E', 'EFFF')
+        self.assertEqual(robot.turn('L'), 'N')
+
+        robot = Robot(1, 2, 'W', 'EFFF')
+        self.assertEqual(robot.turn('L'), 'S')

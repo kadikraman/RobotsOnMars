@@ -27,6 +27,22 @@ class Robot:
             self.current_x -= 1
         return self.current_x, self.current_y
 
+    def turn(self, instruction):
+        """
+        Turns the robot left or right based on the instruction
+        :param instruction: 'L' or 'R'
+        :return: new direction
+        """
+        directions = ['N', 'E', 'S', 'W']
+        left = ['W', 'N', 'E', 'S']
+        right = ['E', 'S', 'W', 'N']
+        index = directions.index(self.current_direction)
+        if instruction == 'L':
+            self.current_direction = left[index]
+        elif instruction == 'R':
+            self.current_direction = right[index]
+        return self.current_direction
+
 
 class Mars:
     """
