@@ -1,7 +1,8 @@
 from game import Mars, Robot
+import sys
 
 
-def read_data(filename):
+def read_instructions(filename):
     """
     Reads the data from file, parses it and turns it into Robot/Mars objects
     :param filename: name of the file to read from
@@ -9,21 +10,20 @@ def read_data(filename):
     """
 
     # reads the raw data from file
-    f = open(filename, 'r')
-    instructions = f.read()
-    f.close()
-
-    # separate data into lines
-    lines = instructions.split('\n')
+    try:
+        with open(filename) as f:
+            instructions = f.read().splitlines()
+    except IOError:
+        sys.exit('IOError: Instructions not where expected! Please create an instructions.txt file')
 
     # first line should be the map coordinates
-    map_coordinates = lines[0].split(' ')
+    map_coordinates = instructions[0].split(' ')
     mars = Mars(int(map_coordinates[0]), int(map_coordinates[1]))
 
     # the robot data are two lines each with a blank line in between
     robot_data = []
-    for line in range(0, len(lines), 3):
-        robot_data.append([lines[line+1], lines[line+2]])
+    for line in range(0, len(instructions), 3):
+        robot_data.append([instructions[line+1], instructions[line+2]])
 
     # create the robots
     robots = []
@@ -83,7 +83,7 @@ def main():
     """
     Main entry point of the application
     """
-    mars, robots = read_data('instructions.txt')
+    mars, robots = read_instructions('instructions.txt')
     result = play(mars, robots)
     print result
 
