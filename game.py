@@ -6,11 +6,26 @@ class Robot:
     """
     Contains the robot game element. Knows its current position and how to move based on letter instructions
     """
-    def __init__(self, start_x, start_y, start_position, instructions):
+    def __init__(self, start_x, start_y, start_direction, instructions):
         self.current_x = start_x
         self.current_y = start_y
-        self.current_position = start_position
+        self.current_direction = start_direction
         self.instructions = instructions
+
+    def move_forward(self):
+        """
+        Moves the robot forward one step
+        :return: x, y coordinates of the new position
+        """
+        if self.current_direction == 'N':
+            self.current_y += 1
+        elif self.current_direction == 'E':
+            self.current_x += 1
+        elif self.current_direction == 'S':
+            self.current_y -= 1
+        elif self.current_direction == 'W':
+            self.current_x -= 1
+        return self.current_x, self.current_y
 
 
 class Mars:

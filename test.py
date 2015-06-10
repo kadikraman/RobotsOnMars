@@ -24,5 +24,26 @@ class RobotTest(unittest.TestCase):
         robot = Robot(1, 2, 'W', 'FFFFL')
         self.assertEqual(robot.current_x, 1)
         self.assertEqual(robot.current_y, 2)
-        self.assertEqual(robot.current_position, 'W')
+        self.assertEqual(robot.current_direction, 'W')
         self.assertEqual(robot.instructions, 'FFFFL')
+
+    def test_move_forward(self):
+        robot = Robot(1, 2, 'N', 'FFF')
+        robot.move_forward()
+        self.assertEqual(robot.current_x, 1)
+        self.assertEqual(robot.current_y, 3)
+
+        robot = Robot(1, 2, 'S', 'FFF')
+        robot.move_forward()
+        self.assertEqual(robot.current_x, 1)
+        self.assertEqual(robot.current_y, 1)
+
+        robot = Robot(1, 2, 'E', 'FFF')
+        robot.move_forward()
+        self.assertEqual(robot.current_x, 2)
+        self.assertEqual(robot.current_y, 2)
+
+        robot = Robot(1, 2, 'W', 'FFF')
+        robot.move_forward()
+        self.assertEqual(robot.current_x, 0)
+        self.assertEqual(robot.current_y, 2)
