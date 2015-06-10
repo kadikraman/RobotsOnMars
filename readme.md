@@ -31,5 +31,5 @@ If a robot falls off the edge of the grid the word “LOST” should be printed 
 
 
 ## Things to be aware of
-- Other than checking whether the instructions file exists, there is *no* error handling or input sanitizing. None. So if out input 'potato', you will receive an exception.
-- When a robot 'falls off the edge', it continues 'moving'. So technically a robot could fall of the edge twice.
+- Other than checking whether the instructions file exists, there is *no* error handling or input sanitizing. None. So if you input 'potato', you will receive an exception.
+- When a robot 'falls off the edge', it continues 'moving'. So technically the same robot could fall of the edge twice (and thus leave two 'scents').
