@@ -1,5 +1,7 @@
 # Robots on Mars
 
+[![Code Climate](https://codeclimate.com/github/kadikraman/RobotsOnMars/badges/gpa.svg)](https://codeclimate.com/github/kadikraman/RobotsOnMars)
+
 A little game featuring some robots traversing the surface of Mars.
 
 ## Running the app
