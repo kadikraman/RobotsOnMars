@@ -11,6 +11,13 @@ class MarsTest(unittest.TestCase):
         self.assertEqual(mars.min_y, 0)
         self.assertEqual(mars.scented_tiles, [])
 
+    def test_is_location_on_map(self):
+        mars = Mars(1, 2)
+        self.assertTrue(mars.is_location_on_map(1, 2))
+        self.assertTrue(mars.is_location_on_map(0, 0))
+        self.assertFalse(mars.is_location_on_map(2, 2))
+        self.assertFalse(mars.is_location_on_map(-1, 2))
+
 
 class RobotTest(unittest.TestCase):
     def test_constructor(self):

@@ -29,3 +29,12 @@ class Mars:
         self.min_x = 0
         self.min_y = 0
         self.scented_tiles = []
+
+    def is_location_on_map(self, x, y):
+        """
+        Checks if a given (x, y) coordinate is on the map
+        :param x: x coordinate
+        :param y: y coordinate
+        :return: True if the location is on the map, False otherwise
+        """
+        return self.max_x >= x >= 0 and self.max_y >= y >= 0
