@@ -16,5 +16,5 @@ python main.py
 ## Running the tests
 Execute the following in the project root directory
 ```
-python -m unittest .
+python -m unittest discover .
 ```
