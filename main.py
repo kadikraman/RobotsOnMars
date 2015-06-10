@@ -1,6 +1,46 @@
 from game import Mars, Robot
 
 
+def read_data(filename):
+    """
+    Reads the data from file, parses it and turns it into Robot/Mars objects
+    :param filename: name of the file to read from
+    :return: Mars map object and Robot array
+    """
+
+    # reads the raw data from file
+    f = open(filename, 'r')
+    instructions = f.read()
+    f.close()
+
+    # separate data into lines
+    lines = instructions.split('\n')
+
+    # first line should be the map coordinates
+    map_coordinates = lines[0].split(' ')
+    mars = Mars(int(map_coordinates[0]), int(map_coordinates[1]))
+
+    # the robot data are two lines each with a blank line in between
+    robot_data = []
+    for line in range(0, len(lines), 3):
+        robot_data.append([lines[line+1], lines[line+2]])
+
+    # create the robots
+    robots = []
+    for data in robot_data:
+        # first line is initial position and direction
+        initial_position = data[0].split(' ')
+        x = int(initial_position[0])
+        y = int(initial_position[1])
+        position = initial_position[2]
+        # second line is the instruction string
+        instructions = data[1]
+        robots.append(Robot(x, y, position, instructions))
+
+    return mars, robots
+
+
+
 def generate_output_string(robots):
     """
     Generate the output string based on current state of the robots
@@ -40,13 +80,12 @@ def play(mars, robots):
     return generate_output_string(robots)
 
 def main():
-    mars = Mars(5, 3)
-    robot1 = Robot(1, 1, 'E', 'RFRFRFRF')
-    robot2 = Robot(3, 2, 'N', 'FRRFLLFFRRFLL')
-    robot3 = Robot(0, 3, 'W', 'LLFFFLFLFL')
-    robots = [robot1, robot2, robot3]
-
-    print(play(mars, robots))
+    """
+    Main entry point of the application
+    """
+    mars, robots = read_data('instructions.txt')
+    result = play(mars, robots)
+    print result
 
 
 if __name__ == '__main__':
