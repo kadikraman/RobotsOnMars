@@ -18,6 +18,16 @@ class MarsTest(unittest.TestCase):
         self.assertFalse(mars.is_location_on_map(2, 2))
         self.assertFalse(mars.is_location_on_map(-1, 2))
 
+    def test_add_scented_tile(self):
+        mars = Mars(2, 2)
+        mars.add_scented_tile(1, 2)
+        self.assertTrue([1, 2] in mars.scented_tiles)
+
+    def test_is_tile_scented(self):
+        mars = Mars(2, 3)
+        mars.add_scented_tile(1, 0)
+        self.assertTrue(mars.is_tile_scented(1, 0))
+
 
 class RobotTest(unittest.TestCase):
     def test_constructor(self):
@@ -26,6 +36,7 @@ class RobotTest(unittest.TestCase):
         self.assertEqual(robot.current_y, 2)
         self.assertEqual(robot.current_direction, 'W')
         self.assertEqual(robot.instructions, 'FFFFL')
+        self.assertFalse(robot.has_been_lost)
 
     def test_move_forward(self):
         robot = Robot(1, 2, 'N', 'FFF')
@@ -46,6 +57,27 @@ class RobotTest(unittest.TestCase):
         robot = Robot(1, 2, 'W', 'FFF')
         robot.move_forward()
         self.assertEqual(robot.current_x, 0)
+        self.assertEqual(robot.current_y, 2)
+
+    def test_move_backward(self):
+        robot = Robot(1, 3, 'N', 'FFF')
+        robot.move_backward()
+        self.assertEqual(robot.current_x, 1)
+        self.assertEqual(robot.current_y, 2)
+
+        robot = Robot(1, 1, 'S', 'FFF')
+        robot.move_backward()
+        self.assertEqual(robot.current_x, 1)
+        self.assertEqual(robot.current_y, 2)
+
+        robot = Robot(2, 2, 'E', 'FFF')
+        robot.move_backward()
+        self.assertEqual(robot.current_x, 1)
+        self.assertEqual(robot.current_y, 2)
+
+        robot = Robot(0, 2, 'W', 'FFF')
+        robot.move_backward()
+        self.assertEqual(robot.current_x, 1)
         self.assertEqual(robot.current_y, 2)
 
     def test_turn_left(self):

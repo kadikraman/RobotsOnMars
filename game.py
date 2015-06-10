@@ -11,6 +11,7 @@ class Robot:
         self.current_y = start_y
         self.current_direction = start_direction
         self.instructions = instructions
+        self.has_been_lost = False
 
     def move_forward(self):
         """
@@ -26,6 +27,19 @@ class Robot:
         elif self.current_direction == 'W':
             self.current_x -= 1
         return self.current_x, self.current_y
+
+    def move_backward(self):
+        """
+        Moves the robot backwards one step
+        """
+        if self.current_direction == 'N':
+            self.current_y -= 1
+        elif self.current_direction == 'E':
+            self.current_x -= 1
+        elif self.current_direction == 'S':
+            self.current_y += 1
+        elif self.current_direction == 'W':
+            self.current_x += 1
 
     def turn(self, instruction):
         """
@@ -69,3 +83,20 @@ class Mars:
         :return: True if the location is on the map, False otherwise
         """
         return self.max_x >= x >= 0 and self.max_y >= y >= 0
+
+    def add_scented_tile(self, x, y):
+        """
+        Adds the given location into the list of scented tiles
+        :param x: x coordinate
+        :param y: y coordinate
+        """
+        self.scented_tiles.append([x, y])
+
+    def is_tile_scented(self, x, y):
+        """
+        Checks if a given (x, y) coordinate is a scented tile
+        :param x: x coordinate
+        :param y: y coordinate
+        :return: True if the coordinate is a scented tile, false otherwise
+        """
+        return [x, y] in self.scented_tiles
